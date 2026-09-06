@@ -17,7 +17,7 @@ collections:
       - { label: "Título de la Obra", name: "title", widget: "string" }
       - { label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animación"] }
       - { label: "Estado", name: "estado", widget: "select", options: ["En Emisión", "Finalizado", "Hiatus"] }
-      - { label: "Etiquetas / Géneros", name: "etiquetas", widget: "list", default: ["Fantasía", "Romance"] }
+      - { label: "Etiquetas / Géneros", name: "etiquetas", widget: "select", multiple: true, options: ["Fantasía", "Romance", "Acción", "Drama", "Comedia", "BL", "Psicológico", "Terror"], required: false }
       - { label: "Portada", name: "portada", widget: "image" }
       - { label: "Sinopsis", name: "sinopsis", widget: "text" }
       
