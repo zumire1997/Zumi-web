@@ -6,30 +6,29 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "proyectos"
-    label: "📚 Proyectos"
-    folder: "_datos/proyectos"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    format: "json"
-    fields:
-      - { label: "Título de la Obra", name: "title", widget: "string" }
-      - { label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animación"] }
-      - { label: "Estado", name: "estado", widget: "select", options: ["En Emisión", "Finalizado", "Hiatus"] }
-      - { label: "Etiquetas / Géneros", name: "etiquetas", widget: "select", multiple: true, options: ["Fantasía", "Romance", "Acción", "Drama", "Comedia", "BL", "Psicológico", "Terror"], required: false }
-      - { label: "Portada", name: "portada", widget: "image" }
-      - { label: "Sinopsis", name: "sinopsis", widget: "text" }
-      
-  - name: "capitulos"
-    label: "📄 Capítulos"
-    folder: "_datos/capitulos"
-    create: true
-    slug: "{{obra}}-cap-{{numero}}"
-    extension: "json"
-    format: "json"
-    fields:
-      - { label: "Obra a la que pertenece", name: "obra", widget: "relation", collection: "proyectos", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
-      - { label: "Número de Capítulo", name: "numero", widget: "number", value_type: "int" }
-      - { label: "Archivo ZIP del Capítulo (Para Manhwas)", name: "archivo_zip", widget: "file", required: false, hint: "Sube aquí el archivo .zip con todas las imágenes del capítulo en orden" }
-      - { label: "Contenido (Para Novelas)", name: "texto_novela", widget: "markdown", required: false }
+  - name: "base_de_datos"
+    label: "🗄️ Base de Datos"
+    files:
+      - label: "📚 Proyectos"
+        name: "proyectos"
+        file: "datos_proyectos.json"
+        fields:
+          - label: "Lista de Obras"
+            name: "obras"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animación"] }
+              - { label: "Portada", name: "portada", widget: "image", required: false }
+              
+      - label: "📄 Capítulos"
+        name: "capitulos"
+        file: "datos_capitulos.json"
+        fields:
+          - label: "Lista de Capítulos"
+            name: "lista"
+            widget: "list"
+            fields:
+              - { label: "Obra", name: "obra", widget: "string" }
+              - { label: "Número", name: "numero", widget: "number", value_type: "int" }
+              - { label: "Archivo ZIP", name: "archivo_zip", widget: "file", required: false }
