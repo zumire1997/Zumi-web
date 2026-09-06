@@ -1,0 +1,9 @@
+{
+  "obras": [
+    {
+      "title": "Prueba 1",
+      "tipo": "Manhwa",
+      "portada": "/images/uploads/aqua.jpg"
+    }
+  ]
+}
