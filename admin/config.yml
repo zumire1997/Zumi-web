@@ -1,0 +1,19 @@
+backend:
+  name: git-gateway
+  branch: main # La rama de tu repositorio en GitHub
+
+media_folder: "images/uploads" # Dónde se guardarán las portadas
+public_folder: "/images/uploads"
+
+collections:
+  - name: "proyectos"
+    label: "Proyectos del Scan"
+    folder: "_proyectos" # Carpeta oculta donde el CMS guardará los datos
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título de la Obra", name: "title", widget: "string"}
+      - {label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animación"]}
+      - {label: "Estado", name: "estado", widget: "select", options: ["En Emisión", "Finalizado", "Hiatus"]}
+      - {label: "Portada", name: "portada", widget: "image"}
+      - {label: "Sinopsis", name: "body", widget: "markdown"}
