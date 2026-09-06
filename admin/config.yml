@@ -1,19 +1,35 @@
 backend:
   name: git-gateway
-  branch: main # La rama de tu repositorio en GitHub
+  branch: main
 
-media_folder: "images/uploads" # D�nde se guardar�n las portadas
+media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   - name: "proyectos"
-    label: "Proyectos del Scan"
-    folder: "_proyectos" # Carpeta oculta donde el CMS guardar� los datos
+    label: "📚 Proyectos"
+    folder: "_datos/proyectos"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
-      - {label: "T�tulo de la Obra", name: "title", widget: "string"}
-      - {label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animaci�n"]}
-      - {label: "Estado", name: "estado", widget: "select", options: ["En Emisi�n", "Finalizado", "Hiatus"]}
-      - {label: "Portada", name: "portada", widget: "image"}
-      - {label: "Sinopsis", name: "body", widget: "markdown"}
+      - { label: "Título de la Obra", name: "title", widget: "string" }
+      - { label: "Tipo", name: "tipo", widget: "select", options: ["Manhwa", "Manga", "Manhua", "Novela", "Animación"] }
+      - { label: "Estado", name: "estado", widget: "select", options: ["En Emisión", "Finalizado", "Hiatus"] }
+      - { label: "Etiquetas / Géneros", name: "etiquetas", widget: "list", default: ["Fantasía", "Romance"] }
+      - { label: "Portada", name: "portada", widget: "image" }
+      - { label: "Sinopsis", name: "sinopsis", widget: "text" }
+      
+  - name: "capitulos"
+    label: "📄 Capítulos"
+    folder: "_datos/capitulos"
+    create: true
+    slug: "{{obra}}-cap-{{numero}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Obra a la que pertenece", name: "obra", widget: "relation", collection: "proyectos", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+      - { label: "Número de Capítulo", name: "numero", widget: "number", value_type: "int" }
+      - { label: "Archivo ZIP del Capítulo (Para Manhwas)", name: "archivo_zip", widget: "file", required: false, hint: "Sube aquí el archivo .zip con todas las imágenes del capítulo en orden" }
+      - { label: "Contenido (Para Novelas)", name: "texto_novela", widget: "markdown", required: false }
